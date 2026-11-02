@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الفعالية - المنصة الجامعية</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<header>
+
+    <body class="bg-light">
+
+        <div id="alert-container" class="position-fixed top-0 start-50 translate-middle-x mt-3"
+            style="z-index: 1050; min-width: 300px;"></div>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid px-4">
+                <div class="logo d-flex align-items-center">
+                    <img src="img/syrianvirtualuniversity_logo.jfif" alt="شعار الجامعة" style="height: 60px;"
+                        class="SVU">
+                    <span class="ms-2 fw-bold text-white">الجامعة الافتراضية السورية</span>
+                </div>
+
+                <div class="nav-links d-flex align-items-center">
+                    <a href="index.html" class="nav-link text-white px-3 active">الرئيسية</a>
+                    <a href="events.html" class="nav-link text-white px-3">الفعاليات</a>
+                    <a href="event.html" class="nav-link text-white px-3">تفاصيل الفعالية</a>
+                    <a href="about.html" class="nav-link text-white px-3">حول المنصة</a>
+                    <a href="contact.html" class="nav-link text-white px-3">اتصل بنا</a>
+
+                    <div class="theme-switch-wrapper ms-3">
+                        <button id="darkModeToggle" class="theme-btn" title="تبديل الإضاءة">
+                            <span id="theme-icon">🌙</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+</header>
+<main>
+    <div class="container my-5">
+        <div class="main-event-wrapper row g-4 align-items-stretch">
+
+            <div class="col-lg-7 order-lg-1">
+                <div class="event-slider-container shadow-sm rounded overflow-hidden position-relative bg-white">
+                    <div id="sliderImages" class="w-100">
+                        <div class="text-center w-100 py-5">جاري تحميل الصور...</div>
+                    </div>
+
+                    <button
+                        class="btn btn-dark btn-sm position-absolute top-50 start-0 translate-middle-y m-3 rounded-circle opacity-75"
+                        onclick="moveSlide(-1)"
+                        style="z-index: 10; width: 45px; height: 45px; border: none;">&#10094;</button>
+                    <button
+                        class="btn btn-dark btn-sm position-absolute top-50 end-0 translate-middle-y m-3 rounded-circle opacity-75"
+                        onclick="moveSlide(1)"
+                        style="z-index: 10; width: 45px; height: 45px; border: none;">&#10095;</button>
+                </div>
+            </div>
+
+            <div class="col-lg-5 order-lg-2">
+                <div class="event-info-box card border-0 shadow-sm p-4 h-100 bg-white">
+                    <h2 class="info-box-title text-primary fw-bold mb-4" id="event-title">تحميل...</h2>
+
+                    <div class="info-details-wrapper">
+                        <div class="info-detail mb-3 pb-3 border-bottom d-flex align-items-center">
+                            <span class="fs-4 ms-3"></span>
+                            <div>
+                                <strong class="text-dark d-block">التاريخ</strong>
+                                <span id="event-date" class="text-secondary">-</span>
+                            </div>
+                        </div>
+
+                        <div class="info-detail mb-3 pb-3 border-bottom d-flex align-items-center">
+                            <span class="fs-4 ms-3"></span>
+                            <div>
+                                <strong class="text-dark d-block">الموقع</strong>
+                                <span id="event-location" class="text-secondary">-</span>
+                            </div>
+                        </div>
+
+                        <div class="info-detail mb-4 d-flex align-items-center">
+                            <span class="fs-4 ms-3"></span>
+                            <div>
+                                <strong class="text-dark d-block">التصنيف</strong>
+                                <span id="event-category" class="badge bg-info text-dark">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-btns d-grid gap-3 d-md-flex mt-auto">
+                        <button class="btn btn-primary flex-grow-1 py-3 fw-bold shadow-sm"
+                            onclick="triggerBooking()">أضف
+                            للتقويم</button>
+                        <button class="btn btn-outline-secondary flex-grow-1 py-3 fw-bold"
+                            onclick="shareEvent()">مشاركة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="description-section mt-5 card border-0 shadow-sm p-4 bg-white">
+            <h3 class="border-bottom pb-2 mb-3 text-primary fw-bold">عن الفعالية</h3>
+            <p id="event-desc" class="text-muted fs-5" style="line-height: 1.9; text-align: justify;">جاري تحميل
+                الوصف...</p>
+        </div>
+
+        <div class="related-events-section mt-5">
+            <h3 class="related-title mb-4 fw-bold text-dark">قد يعجبك أيضاً</h3>
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="relatedEventsGrid">
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="site-footer bg-dark text-white pt-5 pb-3">
+    <div class="container text-end">
+        <div class="row g-4 flex-row-reverse">
+
+            <div class="col-md-4">
+                <h5 class="footer-heading mb-3">عن المنصة</h5>
+                <p class="footer-text small">منصة لعرض ومتابعة أحدث الفعاليات الجامعية والمجتمعية بسهولة ويسر لطلاب
+                    الجامعة الافتراضية.</p>
+            </div>
+
+            <div class="col-md-3">
+                <h5 class="footer-heading mb-3">تواصل معنا</h5>
+                <p class="footer-text small mb-1">info@svuonline.org </p>
+                <p class="footer-text small">+963 11 211 3469 </p>
+            </div>
+
+            <div class="col-md-2">
+                <h5 class="footer-heading mb-3">روابط مهمة</h5>
+                <ul class="list-unstyled small">
+                    <li class="mb-1"><a href="index.html" class="footer-link">الرئيسية</a></li>
+                    <li class="mb-1"><a href="events.html" class="footer-link">الفعاليات</a></li>
+                    <li class="mb-1"><a href="about.html" class="footer-link">الدليل</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 text-center">
+                <h5 class="footer-heading mb-3">تابعنا</h5>
+                <div class="d-flex justify-content-center gap-2">
+                    <a href="https://www.facebook.com/share/1CD3yiC2pG/" target="_blank"
+                        class="footer-social-btn">Facebook</a>
+                    <a href="https://svuis.svuonline.org/SVUIS/index.php" target="_blank"
+                        class="footer-social-btn">SVU</a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 border-secondary opacity-25">
+        <div class="text-center small footer-copyright">
+            © 2026 جميع الحقوق محفوظة - الجامعة الافتراضية السورية
+        </div>
+    </div>
+</footer>
+
+<button id="backToTop" class="btn btn-primary rounded-circle position-fixed bottom-0 start-0 m-4"
+    onclick="scrollToTop()" style="display:none; z-index: 1000;">↑</button>
+
+<!-- JS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
